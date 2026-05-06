@@ -1,161 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aaronne Christian E. Dela Cruz | Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aaronne Portfolio</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f5f6fa;
-            color: #2f3640;
-            line-height: 1.6;
-        }
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Glacial+Indifference&display=swap" rel="stylesheet">
 
-        header {
-            background: #2f3640;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
+<style>
+/* BACKGROUND (CHANGE THIS LATER) */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url("YOUR-BACKGROUND-IMAGE.jpg") no-repeat center center/cover;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 60px;
+    background: #3a3a3a;
+    border: 2px solid #b0b0b0;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    z-index: 1000;
+}
 
-        header p {
-            margin: 5px 0;
-        }
+/* LEFT NAME */
+.nav-left {
+    font-family: "Times New Roman", serif;
+    font-size: 22px;
+    color: white;
+}
 
-        section {
-            max-width: 900px;
-            margin: 20px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
+/* RIGHT LINKS */
+.nav-right a {
+    font-family: 'Glacial Indifference', sans-serif;
+    color: #d3d3d3;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 16px;
+}
 
-        h2 {
-            border-bottom: 2px solid #eee;
-            padding-bottom: 5px;
-            color: #273c75;
-        }
+.nav-right a:hover {
+    color: white;
+}
 
-        ul {
-            padding-left: 20px;
-        }
+/* HERO SECTION */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    position: relative;
+    color: white;
+}
 
-        .contact {
-            text-align: center;
-            font-size: 14px;
-        }
+/* HERO IMAGE */
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("YOUR-HERO-IMAGE.jpg") center/cover no-repeat;
+    z-index: -2;
+}
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 12px;
-            color: gray;
-        }
-    </style>
+/* LEFT BLACK GRADIENT */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.85), transparent);
+    z-index: -1;
+}
+
+/* TEXT CONTENT */
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-size: 46px;
+    margin: 0;
+}
+
+.hero-content h2 {
+    font-size: 25px;
+    font-weight: normal;
+    margin: 10px 0;
+}
+
+.hero-content p {
+    font-size: 19px;
+    margin-top: 15px;
+}
+
+/* CV BUTTON */
+.cv-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-    <h1>Aaronne Christian E. Dela Cruz</h1>
-    <p>Camarin, Caloocan City</p>
-    <p>Email: aaronnechristiandelacruz@gmail.com | 0976 538 3886</p>
-</header>
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="nav-left">Aaronne</div>
+    <div class="nav-right">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+    </div>
+</div>
 
-<section>
-    <h2>About Me</h2>
-    <p>
-        A reliable and detail-oriented IT professional in training, offering strong skills in web development,
-        mobile applications, and database management. Dedicated to continuous learning and problem solving,
-        with the goal of contributing to innovative and efficient technology solutions.
-    </p>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-image"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1>Aaronne Christian E. Dela Cruz</h1>
+        <h2>Web Developer</h2>
+
+        <p>
+            A reliable and detail-oriented IT professional in training, offering strong skills in web development, mobile applications, and database management. Dedicated to continuous learning and problem solving, with the goal of contributing to innovative and efficient technology solutions.
+        </p>
+
+        <button class="cv-btn">Download CV</button>
+    </div>
 </section>
-
-<section>
-    <h2>Education</h2>
-    <ul>
-        <li><b>New Era University (2022 – Present)</b><br>BS Information Technology — President’s Lister</li>
-        <li><b>New Era University - Integrated School (2020 – 2022)</b><br>Graduated with Academic Honors</li>
-        <li><b>Camarin High School (2016 – 2020)</b><br>Graduated with Academic Honors<br>
-            Campus Journalist, Head Creative Director, Member of Clubs</li>
-        <li><b>Camarin Elementary School (2010 – 2016)</b><br>Top 10 Graduate, With Honors</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Relevant Coursework / Project</h2>
-    <p><b>StudySync: A Collaborative Flashcard and Quiz Application</b></p>
-    <ul>
-        <li>Flashcards and quizzes (multiple choice & enumeration)</li>
-        <li>Image, AI prompt, camera scan, and PDF-based inputs</li>
-        <li>Real-time group chat collaboration</li>
-        <li>Live quizzes and interactive study sessions</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Certifications</h2>
-    <ul>
-        <li>Oracle Cloud Infrastructure 2023 AI Certified Foundations Associate</li>
-        <li>Oracle Cloud Data Management 2023 Certified Foundations Associate</li>
-        <li>Oracle Cloud Infrastructure 2023 Certified Foundations Associate</li>
-        <li>SQL and Relational Databases 101</li>
-        <li>NoSQL and DBaaS 101</li>
-        <li>CISCO Introduction to Cybersecurity</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Technical Skills</h2>
-    <ul>
-        <li><b>Programming:</b> Python, HTML, PHP, Java, JavaScript, Kotlin, Bash</li>
-        <li><b>Databases:</b> Firebase, MongoDB, MySQL, IBM DB2</li>
-        <li><b>Development:</b> Laravel, Android (Java/Kotlin)</li>
-        <li><b>Tools:</b> VS Code, Figma, Canva, Packet Tracer, PowerBI, Eclipse</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Soft Skills</h2>
-    <ul>
-        <li>Problem-solving and critical thinking</li>
-        <li>Team collaboration and leadership</li>
-        <li>Systematic and detail-oriented</li>
-        <li>Data analysis and reporting</li>
-        <li>Communication and presentation</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Languages</h2>
-    <ul>
-        <li>English – Fluent</li>
-        <li>Filipino – Native</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Interests</h2>
-    <ul>
-        <li>Web and mobile development</li>
-        <li>Database design</li>
-        <li>UI/UX design</li>
-        <li>Video editing and digital design</li>
-    </ul>
-</section>
-
-<footer>
-    <p>© 2026 Aaronne Christian E. Dela Cruz | Digital Portfolio</p>
-</footer>
 
 </body>
 </html>
