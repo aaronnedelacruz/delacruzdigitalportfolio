@@ -1,2 +1,2 @@
-# aaronnedelacruz-digitalportfolio
+# aaronnedelacruz
 Digital Portfolio
