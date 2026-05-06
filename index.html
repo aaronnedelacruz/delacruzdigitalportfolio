@@ -13,22 +13,26 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: url("YOUR-BACKGROUND-IMAGE.jpg") center/cover no-repeat;
 }
 
 /* NAVBAR */
 .navbar {
     position: fixed;
-    top: 15px;
+    top: 30px;
     left: 50%;
     transform: translateX(-50%);
-    width: 38%;
-    height: 45px; /* SHORTER */
-    background: #1f1f1f; /* DARKER */
+    width: 560px;
+    max-width: 92vw;   /* prevents overflow on small screens */
+    height: 45px;
+    background: #1f1f1f;
     border: 1px solid #6f6f6f;
     border-radius: 50px;
+
     display: flex;
     align-items: center;
+
+    justify-content: space-between; /* THIS IS THE FIX */
+
     padding: 0 20px;
     z-index: 1000;
 }
@@ -39,6 +43,7 @@ body {
     font-size: 20px;
     color: white;
     margin-right: 40px; /* SPACE FROM LINKS */
+    flex-shrink: 0;    /* prevents shrinking weirdly */
 }
 
 /* RIGHT LINKS */
@@ -52,6 +57,7 @@ body {
     color: #d0d0d0;
     text-decoration: none;
     font-size: 15px;
+    white-space: nowrap; /* prevents wrapping/scaling behavior */
 }
 
 .nav-right a:hover {
@@ -63,34 +69,38 @@ body {
     height: 100vh;
     display: flex;
     align-items: center;
-    padding: 0 5%;
-    position: relative;
-    color: white;
+
 }
 
 /* HERO IMAGE ONLY */
 .hero-image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
+    position: relative;
     width: 100%;
-    height: 60vh; /* controlled height for 2.5:1 feel */
-    
-    background: url("YOUR-HERO-IMAGE.jpg") center/cover no-repeat;
-    z-index: -2;
+    height: 70vh;
+
+    background-image: url("pictures/hero2.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    /* THIS MAKES IT MOVE RESPONSIVELY */
+    background-position: 70% center;
+
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
+    transform: translateY(+20px); /* lifts it slightly up */
+
 }
 
 /* GRADIENT ONLY ON HERO IMAGE (LEFT SIDE ONLY) */
 .hero-overlay {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 60vh;
+    height: 100%;
 
     background: linear-gradient(
         to right,
@@ -98,79 +108,817 @@ body {
         rgba(0,0,0,0.4) 40%,
         transparent 70%
     );
-
-    z-index: -1;
 }
 
 /* HERO TEXT */
 .hero-content {
-    max-width: 600px;
+    position: relative;
     z-index: 2;
+    max-width: 600px;
+    color: white;
+    margin-left: 60px;   /* ← push text away from the left */
+    width: 38%;
+    min-width: 320px;
+    max-width: 520px;
+
 }
 
 .hero-content h1 {
-    font-size: 46px;
+    font-size: clamp(28px, 4.5vw, 46px);;
     margin: 0;
 }
 
 .hero-content h2 {
-    font-size: 25px;
+    font-size: clamp(16px, 2.6vw, 25px);
     font-weight: normal;
     margin: 10px 0;
 }
 
 .hero-content p {
-    font-size: 19px;
+    font-size: clamp(14px, 2.1vw, 19px);
     margin-top: 15px;
 }
 
 /* CV BUTTON */
 .cv-btn {
+    font-size: clamp(12px, 1.8vw, 14px);
+    padding: clamp(8px, 1.5vw, 10px) clamp(14px, 2vw, 20px);
     margin-top: 20px;
-    padding: 10px 20px;
     background: white;
     color: black;
     border: none;
     cursor: pointer;
-    font-size: 14px;
     border-radius: 5px;
+}
+
+.page {
+    background: url("pictures/home2.png") center/cover no-repeat;
+    min-height: 100vh;
+}
+
+.about {
+    min-height: 90vh;
+    padding: 60px 40px;
+    background: url("pictures/gray-gradient.png") center 20%/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+
+    overflow: hidden;
+}
+
+.about-header {
+    background: white;
+    width: 100px;
+    color: black;
+    font-family: "Times New Roman", serif;
+    font-weight: 600;
+    font-size: 18px;
+
+    padding: 8px 22px;
+    border-radius: 50px;
+
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 0 25px rgba(255,255,255,0.12);
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-family: 'Glacial Indifference', sans-serif;
+    text-align: center;
+}
+
+/* container holding both cards */
+.about-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+
+    width: 1000px;      /* shrink to content */
+    max-width: 1000px;       /* prevents it from getting too wide */
+
+    margin: 0 auto;          /* THIS centers the whole block */
+}
+
+/* shared card style */
+.card {
+    background: black;
+    box-shadow: 0 0 30px 12px rgba(189, 189, 189, 0.15);
+    color: white;
+    padding: 25px;
+    border-radius: 16px; 
+}
+
+/* LEFT PROFILE CARD */
+.profile-card {
+    width: 320px;
+    text-align: center;
+}
+
+.profile-pic {
+    width: 300px;
+    height: 300px;
+    background: url("pictures/aaronne.jpg") center/cover no-repeat;
+    margin: 0 auto 20px;
+    font-family: 'Glacial Indifference', sans-serif;
+}
+
+.profile-card h2 {
+    font-size: 20px;
+    margin: 10px 0;
+    font-family: 'Glacial Indifference', sans-serif;
+}
+
+.profile-card h3 {
+    font-size: 16px;
+    font-weight: normal;
+    color: #ccc;
+}
+
+/* RIGHT EDUCATION CARD */
+.education-card {
+    flex: 1;
+    font-family: 'Glacial Indifference', sans-serif;
+}
+
+.education-card h2 {
+    margin-top: 0;
+    font-family: 'Glacial Indifference', sans-serif;
+}
+
+.education-card p {
+    line-height: 1.6;
+    font-size: 14px;
+    font-family: 'Glacial Indifference', sans-serif;
+}
+
+.edu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 14px 0;
+    gap: 20px;
+
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 18px;          /* slightly larger but controlled */
+    line-height: 1.6;         /* makes it feel airy, not fat */
+    font-weight: 400;         /* ensures slim look */
+}
+
+/* left side text */
+.edu-left {
+    flex: 1;
+    font-weight: 400;
+}
+
+/* right aligned years */
+.edu-right {
+    white-space: nowrap;
+    text-align: right;
+
+    color: rgba(255,255,255,0.75);  /* softer than pure gray */
+    font-size: 16px;                /* closer match, not too small */
+    font-weight: 300;               /* lighter feel */
+}
+
+
+@media (max-width: 900px) {
+    .about-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .profile-card {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .education-card {
+        width: 100%;
+        max-width: 600px;
+    }
+}
+
+/* EXPERIENCE SECTION BACKGROUND */
+.experience {
+    min-height: 40vh;
+    padding: 80px 40px;
+
+    background: url("pictures/dp-bg.jpg") center/cover no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+    z-index: 2;          /* sits above about */
+    margin-top: -40px;   /* THIS creates the overlap */
+
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+
+    overflow: hidden;
+}
+
+/* HEADER */
+.experience-header {
+    color: white;
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+/* MAIN CARD */
+.experience-card {
+    display: flex;
+    gap: 20px;
+
+    background: black;
+    color: white;
+
+    padding: 25px;
+    border-radius: 16px;
+
+    max-width: 900px;
+    width: 100%;
+
+    box-shadow:
+        0 0 12px rgba(255,255,255,0.18),
+        0 0 45px rgba(255,255,255,0.22),
+        0 0 90px rgba(255,255,255,0.12);
+}
+
+/* LEFT IMAGE */
+.exp-img {
+    width: 90px;
+    height: 90px;
+
+    background: url("pictures/simplevia.jpg") center/cover no-repeat;
+    border-radius: 8px;
+}
+
+/* RIGHT SIDE */
+.exp-right {
+    flex: 1;
+    font-family: 'Glacial Indifference', sans-serif;
+}
+
+/* TITLE ROW (NAME + DATE SAME LINE) */
+.exp-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+}
+
+/* NAME LEFT */
+.exp-title {
+    font-weight: 500;
+}
+
+/* DATE RIGHT */
+.exp-date {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    white-space: nowrap;
+}
+
+/* ROLE */
+.exp-role {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* LOCATION */
+.exp-location {
+    font-size: 13px;
+    margin-top: 5px;
+    color: rgba(255,255,255,0.6);
+}
+
+/* DESCRIPTION */
+.exp-desc {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.project-header {
+    color: white;
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 20px;
+    margin: 60px 0 20px 0;  
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+/* project logo size tweak */
+.project-img {
+    background: url("pictures/studysync.png") center/cover no-repeat;
+}
+
+/* SAME CARD STYLE BUT SLIGHTLY DIFFERENT GLOW */
+.project-card {
+    box-shadow:
+        0 0 15px rgba(255,255,255,0.20),
+        0 0 60px rgba(255,255,255,0.18),
+        0 0 110px rgba(255,255,255,0.10);
+        margin-bottom: 200px;
+
+}
+.skills {
+    min-height: 80vh;
+    padding: 80px 40px;
+    background: url("pictures/dp-bg3.jpg") center/cover no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+
+    position: relative;
+    z-index: 3;
+    margin-top: -40px;
+}
+
+.skills-header {
+    color: white;
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 26px;
+    margin-bottom: 40px;
+}
+
+/* 2-column layout */
+.skills-grid {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* each side column */
+.skills-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* label containers (top headers) */
+.skills-label {
+    background: rgba(0,0,0,0.85);
+    color: white;
+
+    padding: 12px 18px;
+    border-radius: 12px;
+
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255,255,255,0.12);
+}
+
+/* each skill container */
+.skills-card {
+    background: black;
+    color: white;
+
+    padding: 18px;
+    border-radius: 14px;
+
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 16px;
+
+    box-shadow: 0 0 20px rgba(255,255,255,0.12);
+}
+
+/* soft skills special height */
+.soft-card {
+    min-height: 300px;
+}
+
+/* icons row */
+.icon-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+/* controlled image size */
+.icon-row img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+}
+
+/* bullet list */
+.soft-card ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+    .skills-grid {
+        flex-direction: column;
+    }
+}
+
+.credentials {
+    min-height: 70vh;
+    padding: 80px 40px;
+
+    background: url("gray-gradient3.png") center/cover no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+
+    position: relative;
+    z-index: 3;
+    margin-top: -40px;
+
+    overflow: hidden; /* IMPORTANT FIX */
+}
+
+.credentials-header {
+    color: white;
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 26px;
+    margin-bottom: 40px;
+}
+
+/* 2-column layout */
+.credentials-container {
+    display: flex;
+    gap: 30px;
+
+    width: 100%;
+    max-width: 1000px;
+    justify-content: center;
+}
+
+/* each box */
+.cred-card {
+    flex: 1;
+    background: black;
+    color: white;
+
+    padding: 20px;
+    border-radius: 14px;
+
+    box-shadow: 0 0 25px rgba(255,255,255,0.12);
+
+    font-family: 'Glacial Indifference', sans-serif;
+}
+
+/* title inside box */
+.cred-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* list styling */
+.cred-card ul {
+    margin: 0;
+    padding-left: 18px;
+
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+    .credentials-container {
+        flex-direction: column;
+    }
 }
 
 </style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-    <div class="nav-left">Aaronne</div>
+<div class="page">
 
-    <div class="nav-right">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="nav-left">Aaronne</div>
+
+        <div class="nav-right">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#credentials">Credentials</a>
+        </div>
     </div>
-</div>
 
-<!-- HERO -->
-<section class="hero">
+    <!-- HERO -->
+    <section class="hero">
 
-    <div class="hero-image"></div>
-    <div class="hero-overlay"></div>
+    <div class="hero-image">
 
-    <div class="hero-content">
-        <h1>Aaronne Christian E. Dela Cruz</h1>
-        <h2>Web Developer</h2>
+        <div class="hero-overlay"></div>
 
-        <p>
-            A reliable and detail-oriented IT professional in training, offering strong skills in web development, mobile applications, and database management. Dedicated to continuous learning and problem solving, with the goal of contributing to innovative and efficient technology solutions.
-        </p>
+        <div class="hero-content">
+            <h1>Aaronne Christian E. Dela Cruz</h1>
+            <h2>Web Developer</h2>
 
-        <button class="cv-btn">Download CV</button>
+            <p>
+                A reliable and detail-oriented IT professional in training, offering strong skills in web development, mobile applications, and database management. Dedicated to continuous learning and problem solving, with the goal of contributing to innovative and efficient technology solutions.
+            </p>
+
+            <button class="cv-btn">Download CV</button>
+        </div>
+
     </div>
 
 </section>
+
+<!-- ABOUT SECTION -->
+<section class="about" id="about">
+    <div class="about-header">
+        About
+    </div>
+
+    <div class="about-container">
+
+        <!-- LEFT CARD -->
+        <div class="card profile-card">
+
+            <div class="profile-pic"></div>
+
+            <h2>Aaronne Christian E. Dela Cruz</h2>
+            <h3>Web Developer</h3>
+
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card education-card">
+
+            <h2>Education</h2>
+
+            <div class="edu-item">
+                <div class="edu-left">
+                    <b>New Era University</b><br>
+                    BS Information Technology<br>
+                    • President’s Lister
+                </div>
+                <div class="edu-right">2022 – Present</div>
+            </div>
+
+            <div class="edu-item">
+                <div class="edu-left">
+                    <b>New Era University – Integrated School</b><br>
+                    • Graduated with Academic Honors
+                </div>
+                <div class="edu-right">2020 – 2022</div>
+            </div>
+
+            <div class="edu-item">
+                <div class="edu-left">
+                    <b>Camarin High School</b><br>
+                    • Campus Journalist<br>
+                    • Head Creative Director
+                </div>
+                <div class="edu-right">2016 – 2020</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- EXPERIENCE SECTION -->
+<section class="experience" id="experience">
+
+    <div class="experience-header">
+        Experience
+    </div>
+
+    <div class="experience-container">
+
+        <div class="experience-card">
+
+            <!-- LEFT IMAGE -->
+            <div class="exp-left">
+                <div class="exp-img"></div>
+            </div>
+
+            <!-- RIGHT TEXT -->
+            <div class="exp-right">
+
+                <div class="exp-title-row">
+                    <div class="exp-title">
+                        Simplevia Technologies Inc.
+                    </div>
+
+                    <div class="exp-date">
+                        Oct 2025 – Mar 2026
+                    </div>
+                </div>
+
+                <div class="exp-role">
+                    Intern
+                </div>
+
+                <div class="exp-location">
+                    Makati, National Capital Region, Philippines · Remote
+                </div>
+
+                <div class="exp-desc">
+                    Designed UI/UX and prototypes for a web-based environmental compliance system covering more than 18 modules with usability and requirements alignment. Built responsive mobile counterparts for cross-device access. Assisted in front-end development by implementing assigned web pages.
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PROJECT HEADER -->
+<div class="project-header">
+    Projects
+</div>
+
+<div id="projects">
+    <!-- PROJECT CARD -->
+    <div class="experience-card project-card">
+
+        <!-- LEFT IMAGE -->
+        <div class="exp-left">
+            <div class="exp-img project-img"></div>
+        </div>
+
+        <!-- RIGHT TEXT -->
+        <div class="exp-right">
+
+            <div class="exp-title-row">
+                <div class="exp-title">
+                    StudySync: A Collaborative Flashcard and Quiz Application with Chat Room Integration
+                </div>
+            </div>
+
+            <div class="exp-desc">
+                StudySync is a mobile-first learning application developed that enhances collaborative studying through flashcards, quizzes, and real-time communication.
+                <br><br>
+
+                <b>Key Features:</b><br>
+                • Creation, editing, and sharing of flashcards and quizzes (multiple choice and enumeration)<br>
+                • Flexible content creation using images, AI-generated prompts, scanned documents via camera, PDF files, and manual input<br>
+                • Real-time collaboration through group chat and study sessions<br>
+                • Hosting of live quizzes inside group chats for interactive learning, competition, and group review
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+    </div>
+
+</section>
+
+<!-- SKILLS SECTION -->
+<section class="skills" id="skills">
+
+    <div class="skills-header">Skills</div>
+
+    <div class="skills-grid">
+
+        <!-- LEFT COLUMN -->
+        <div class="skills-col">
+
+            <div class="skills-label">Technical Skills</div>
+
+            <div class="skills-card">
+                Programming Languages
+                <div class="icon-row">
+                    <img src="pictures/java.webp">
+                    <img src="pictures/python.png">
+                    <img src="pictures/html.png">
+                    <img src="pictures/css.png">
+                    <img src="pictures/javascript.png">
+                    <img src="pictures/php.png">
+                    <img src="pictures/kotlin.png">
+                </div>
+            </div>
+
+            <div class="skills-card">
+                Software Tools
+                <div class="icon-row">
+                    <img src="pictures/vscode.png">
+                    <img src="pictures/figma.png">
+                    <img src="pictures/packet tracer.png">
+                    <img src="pictures/powerbi.png">
+                    <img src="pictures/laragon.png">
+                    <img src="pictures/lucidchart.png">
+                </div>
+            </div>
+
+            <div class="skills-card">
+                Databases
+                <div class="icon-row">
+                    <img src="pictures/ibm db2.png">
+                    <img src="pictures/firebase.png">
+                    <img src="pictures/mongodb.png">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="skills-col">
+
+            <div class="skills-label">Soft Skills</div>
+
+            <div class="skills-card soft-card">
+                <ul>
+                    <li>Team collaboration</li>
+                    <li>Time management</li>
+                    <li>Problem solving</li>
+                    <li>Adaptability</li>
+                    <li>Communication</li>
+                    <li>Critical thinking</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CREDENTIALS SECTION -->
+<section class="credentials" id="credentials">
+
+    <div class="credentials-header">Credentials</div>
+
+    <div class="credentials-container">
+
+        <!-- CERTIFICATIONS -->
+        <div class="cred-card">
+
+            <div class="cred-title">Certifications</div>
+
+            <ul>
+                <li>Introduction to Packet Tracer</li>
+                <li>Oracle Cloud Infrastructure 2023 AI Certified Foundations Associate</li>
+                <li>Oracle Cloud Data Management 2023 Certified Foundations Associate</li>
+                <li>Oracle Cloud Infrastructure 2023 Certified Foundations Associate</li>
+                <li>SQL and Relational Databases 101</li>
+                <li>NoSQL and DBaaS 101</li>
+                <li>CISCO Networking Academy | Introduction to Cybersecurity</li>
+                <li>Introduction to Cybersecurity</li>
+            </ul>
+
+        </div>
+
+        <!-- SEMINARS -->
+        <div class="cred-card">
+
+            <div class="cred-title">Seminars</div>
+
+            <ul>
+                <li>Life After Graduation: The Reality No One Talks About</li>
+                <li>Building A Home without Windows: A Student's Guide to Linux</li>
+                <li>Agentic Coding</li>
+                <li>Web Penetration Testing 101</li>
+                <li>Behind the Scenes of Game QA: Testing, NDA's, and Daily Life</li>
+                <li>Power UP your Passion: Careers in the Gaming World</li>
+                <li>Modern Web Development: How a Full Stack Web App Goes Live</li>
+                <li>Beyond the Degree: Skills and Competencies for Your Future Tech</li>
+                <li>Rewrite your Legacy: From Comics to Hollywood – A 2D Illustrator’s Journey</li>
+                <li>Business Communication: How to Earn in Animation</li>
+                <li>From Frame to Scene: I Have a Degree in Animation, Now What’s Next?</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
 
 </body>
 </html>
