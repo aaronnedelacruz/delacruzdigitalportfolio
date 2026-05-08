@@ -159,14 +159,14 @@ body {
 .about {
     min-height: 90vh;
     padding: 60px 40px;
-    background: url("pictures/gray-gradient.png") center 20%/cover no-repeat;
+    background: url("pictures/gray-gradient4.png") center 20%/cover no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
-
+    position: relative;
     overflow: hidden;
 }
 
@@ -323,6 +323,25 @@ body {
     overflow: hidden;
 }
 
+.experience::before {
+    content: "";
+    position: absolute;
+    top: 0;              /* move to TOP */
+    left: 0;
+    width: 100%;
+    height: 320px;      /* more spread out */
+
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.35) 0%,
+        rgba(255,255,255,0.18) 40%,
+        rgba(255,255,255,0.08) 70%,
+        rgba(255,255,255,0) 100%
+    );
+
+    pointer-events: none;
+}
+
 /* HEADER */
 .experience-header {
     color: white;
@@ -351,6 +370,8 @@ body {
         0 0 12px rgba(255,255,255,0.18),
         0 0 45px rgba(255,255,255,0.22),
         0 0 90px rgba(255,255,255,0.12);
+
+    flex-wrap: wrap; /* ✅ allows stacking */
 }
 
 /* LEFT IMAGE */
@@ -362,9 +383,14 @@ body {
     border-radius: 8px;
 }
 
+.exp-left {
+    flex: 0 0 auto;
+}
+
 /* RIGHT SIDE */
 .exp-right {
     flex: 1;
+    min-width: 250px; /* prevents squishing */
     font-family: 'Glacial Indifference', sans-serif;
 }
 
@@ -432,6 +458,28 @@ body {
         margin-bottom: 200px;
 
 }
+
+@media (max-width: 600px) {
+    .experience-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .exp-right {
+        min-width: unset;
+    }
+
+    .exp-title-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .exp-location {
+        text-align: center;
+    }
+}
+
 .skills {
     min-height: 80vh;
     padding: 80px 40px;
@@ -445,8 +493,28 @@ body {
     border-top-right-radius: 40px;
 
     position: relative;
-    z-index: 3;
+    z-index: 2;
     margin-top: -40px;
+    overflow: hidden; 
+}
+
+.skills::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 320px;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.35) 0%,
+        rgba(255,255,255,0.18) 40%,
+        rgba(255,255,255,0.08) 70%,
+        rgba(255,255,255,0) 100%
+    );
+
+    pointer-events: none;
 }
 
 .skills-header {
@@ -539,11 +607,160 @@ body {
     }
 }
 
+.interests {
+    padding: 80px 40px;
+    background: transparent; /* keeps your layered look */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.interests-header {
+    color: white;
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+/* COLUMN TITLES */
+.interests-labels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 122%;
+    max-width: 1000px;
+    text-align: center;
+    color: white;
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* GRID CARDS */
+.interests-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 122%;
+    max-width: 1000px;
+}
+
+/* CLICKABLE CARD */
+.interest-card {
+    text-decoration: none;
+}
+
+/* FRAME AROUND IMAGE */
+.interest-frame {
+    background: rgba(0,0,0,0.7);
+    padding: 15px;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.12);
+    transition: transform 0.2s ease;
+}
+
+/* IMAGE ITSELF */
+.interest-frame img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+/* HOVER EFFECT */
+.interest-frame:hover {
+    transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .interests-labels,
+    .interests-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* DARK BACKDROP */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.75);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+/* DARK BACKDROP */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+/* DARK OVERLAY */
+.lightbox-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+}
+
+/* CENTER CONTENT */
+.lightbox-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 2;
+}
+
+/* IMAGE (IMPORTANT: NO STRETCHING) */
+.lightbox-content img {
+    max-width: 80vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.2);
+}
+
+/* BUTTONS */
+.nav-btn {
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    font-size: 30px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.nav-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
 .credentials {
     min-height: 70vh;
     padding: 80px 40px;
 
-    background: url("gray-gradient3.png") center/cover no-repeat;
+    background: url("pictures/gray-gradient4.png") center/cover no-repeat;
 
     display: flex;
     flex-direction: column;
@@ -551,12 +768,34 @@ body {
 
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 
     position: relative;
-    z-index: 3;
+    z-index:3;
     margin-top: -40px;
 
-    overflow: hidden; /* IMPORTANT FIX */
+    overflow: hidden;
+}
+
+.credentials::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    height: 120px; /* tighter than before */
+
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0.08) 50%,
+        rgba(255,255,255,0) 100%
+    );
+
+    pointer-events: none;
+    z-index: 1;
 }
 
 .credentials-header {
@@ -629,6 +868,7 @@ body {
             <a href="#experience">Experience</a>
             <a href="#projects">Projects</a>
             <a href="#skills">Skills</a>
+            <a href="#interests">Interests</a>
             <a href="#credentials">Credentials</a>
         </div>
     </div>
@@ -849,22 +1089,60 @@ body {
         <!-- RIGHT COLUMN -->
         <div class="skills-col">
 
-            <div class="skills-label">Soft Skills</div>
+    <div class="skills-label">Soft Skills</div>
 
-            <div class="skills-card soft-card">
-                <ul>
-                    <li>Team collaboration</li>
-                    <li>Time management</li>
-                    <li>Problem solving</li>
-                    <li>Adaptability</li>
-                    <li>Communication</li>
-                    <li>Critical thinking</li>
-                </ul>
-            </div>
+    <div class="skills-card soft-card">
+        <ul>
+            <li>Problem-solving and critical thinking</li>
+            <li>Digital tools and technology proficiency</li>
+            <li>Systematic and detail-oriented</li>
+            <li>Data collection and analysis</li>
+            <li>Team collaboration and leadership</li>
+            <li>Report writing and presentation</li>
+            <li>Interpersonal communication</li>
+        </ul>
+    </div>
 
-        </div>
+</div>
 
     </div>
+
+    <!-- INTERESTS SECTION -->
+<section class="interests" id="interests">
+
+    <div class="interests-header">Interests</div>
+
+    <!-- COLUMN TITLES -->
+    <div class="interests-labels">
+        <div>Graphic / Digital Design</div>
+        <div>Web & Mobile App Development</div>
+        <div>UI / UX Design & Prototyping</div>
+    </div>
+
+    <!-- GRID CONTAINERS -->
+    <div class="interests-grid">
+
+        <!-- COLUMN 1 -->
+        <div class="interest-frame" id="graphicTrigger">
+            <img src="pictures/graphicdesign.png" alt="Graphic Design">
+        </div>
+
+        <!-- COLUMN 2 -->
+        <div class="interest-frame" id="webMobileTrigger">
+            <img src="pictures/webmobileapp.png" alt="Web Development">
+        </div>
+
+        <!-- COLUMN 3 -->
+        <div class="interest-frame" id="prototypingTrigger">
+            <img src="pictures/prototyping.png" alt="UI UX Design">
+        </div>
+        
+
+    </div>
+
+</section>
+    
+    
 
 </section>
 
@@ -899,17 +1177,17 @@ body {
             <div class="cred-title">Seminars</div>
 
             <ul>
-                <li>Life After Graduation: The Reality No One Talks About</li>
-                <li>Building A Home without Windows: A Student's Guide to Linux</li>
+                <li>Modern Web Development: How a Full Stack Web App Goes Live</li>
                 <li>Agentic Coding</li>
                 <li>Web Penetration Testing 101</li>
+                <li>Building A Home without Windows: A Student's Guide to Linux</li>
+                <li>Beyond the Degree: Skills and Competencies for Your Future Tech</li>
+                <li>Life After Graduation: The Reality No One Talks About</li>
                 <li>Behind the Scenes of Game QA: Testing, NDA's, and Daily Life</li>
                 <li>Power UP your Passion: Careers in the Gaming World</li>
-                <li>Modern Web Development: How a Full Stack Web App Goes Live</li>
-                <li>Beyond the Degree: Skills and Competencies for Your Future Tech</li>
-                <li>Rewrite your Legacy: From Comics to Hollywood – A 2D Illustrator’s Journey</li>
                 <li>Business Communication: How to Earn in Animation</li>
                 <li>From Frame to Scene: I Have a Degree in Animation, Now What’s Next?</li>
+                <li>Rewrite your Legacy: From Comics to Hollywood – A 2D Illustrator’s Journey</li>
             </ul>
 
         </div>
@@ -920,5 +1198,117 @@ body {
 
 </div>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    
+    <div class="lightbox-overlay"></div>
+
+    <div class="lightbox-content">
+
+        <button class="nav-btn" id="prevBtn">&#10094;</button>
+
+        <img id="lightboxImg" src="" alt="preview">
+
+        <button class="nav-btn" id="nextBtn">&#10095;</button>
+
+    </div>
+
+</div>
+
+<script>
+
+const graphicImages = [
+    "pictures/graphic1.png",
+    "pictures/graphic2.jpg",
+    "pictures/graphic3.jpg",
+    "pictures/graphic4.png",
+    "pictures/graphic5.png"
+];
+
+const webMobileImages = [
+    "pictures/webmobileapp1.png",
+    "pictures/webmobileapp2.png",
+    "pictures/webmobileapp3.png",
+    "pictures/webmobileapp4.png",
+    "pictures/webmobileapp5.png",
+    "pictures/webmobileapp6.png",
+    "pictures/webmobileapp7.png",
+    "pictures/webmobileapp8.png",
+    "pictures/webmobileapp9.png",
+    "pictures/webmobileapp10.png",
+    "pictures/webmobileapp11.png",
+    "pictures/webmobileapp12.png",
+    "pictures/webmobileapp13.png",
+    "pictures/webmobileapp14.png",
+    "pictures/webmobileapp15.png",
+    "pictures/webmobileapp16.png",
+    "pictures/webmobileapp17.png",
+    "pictures/webmobileapp18.png",
+    "pictures/webmobileapp19.png",
+    "pictures/webmobileapp20.png",
+    "pictures/webmobileapp21.png",
+    "pictures/webmobileapp22.png",
+    "pictures/webmobileapp23.png",
+    "pictures/webmobileapp24.png",
+    "pictures/webmobileapp25.png",
+    "pictures/webmobileapp26.png",
+    "pictures/webmobileapp27.png",
+    "pictures/webmobileapp28.png",
+    "pictures/webmobileapp29.png",
+    "pictures/webmobileapp30.png"
+];
+
+const prototypingImages = [
+    "pictures/prototyping1.png",
+    "pictures/prototyping2.png"
+];
+
+let currentSet = [];
+let index = 0;
+
+const lightbox = document.getElementById("lightbox");
+const img = document.getElementById("lightboxImg");
+
+// OPEN GRAPHIC GALLERY
+document.getElementById("graphicTrigger").addEventListener("click", () => {
+    currentSet = graphicImages;
+    index = 0;
+    img.src = currentSet[index];
+    lightbox.style.display = "flex";
+});
+
+// OPEN WEB/MOBILE GALLERY
+document.getElementById("webMobileTrigger").addEventListener("click", () => {
+    currentSet = webMobileImages;
+    index = 0;
+    img.src = currentSet[index];
+    lightbox.style.display = "flex";
+});
+
+document.getElementById("prototypingTrigger").addEventListener("click", () => {
+    currentSet = prototypingImages; // FIXED
+    index = 0;
+    img.src = currentSet[index];
+    lightbox.style.display = "flex";
+});
+
+// NEXT IMAGE (ONLY WITHIN CURRENT SET)
+document.getElementById("nextBtn").addEventListener("click", () => {
+    index = (index + 1) % currentSet.length;
+    img.src = currentSet[index];
+});
+
+// PREV IMAGE (ONLY WITHIN CURRENT SET)
+document.getElementById("prevBtn").addEventListener("click", () => {
+    index = (index - 1 + currentSet.length) % currentSet.length;
+    img.src = currentSet[index];
+});
+
+// CLOSE LIGHTBOX
+document.querySelector(".lightbox-overlay").addEventListener("click", () => {
+    lightbox.style.display = "none";
+});
+
+</script>
 </body>
 </html>
